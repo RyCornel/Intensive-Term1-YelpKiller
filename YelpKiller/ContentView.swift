@@ -6,6 +6,50 @@
 //
 
 import SwiftUI
+//import Foundation
+//import Combine
+//import CoreLocation
+//
+//class LocationViewModel: NSObject, ObservableObject{
+//
+//  @Published var userLatitude: Double = 0
+//  @Published var userLongitude: Double = 0
+//
+//  private let locationManager = CLLocationManager()
+//
+//  override init() {
+//    super.init()
+//    self.locationManager.delegate = self
+//    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//    self.locationManager.requestWhenInUseAuthorization()
+//    self.locationManager.startUpdatingLocation()
+//  }
+//}
+//
+//struct LocationView: View {
+//
+//  @ObservedObject var locationViewModel = LocationViewModel()
+//
+//  var body: some View {
+//    VStack {
+//      Text("Your location is:")
+//      HStack {
+//        Text("Latitude: \(locationViewModel.userLatitude)")
+//        Text("Longitude: \(locationViewModel.userLongitude)")
+//      }
+//    }
+//  }
+//}
+//
+//extension LocationViewModel: CLLocationManagerDelegate {
+//
+//  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//    guard let location = locations.last else { return }
+//    userLatitude = location.coordinate.latitude
+//    userLongitude = location.coordinate.longitude
+//    print(location)
+//  }
+//}
 
 struct ContentView: View {
     @State var show = false
