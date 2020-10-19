@@ -58,6 +58,7 @@ struct ContentView: View {
     @State var swipeCard = false
     @State var bottomState = CGSize.zero
     @State var showFull = false
+    @State var userReview = String.self
     
     var body: some View {
         ZStack {
@@ -252,7 +253,7 @@ struct BottomCardView: View {
             TextField("Enter Review Here", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
                 .padding([.top, .leading, .bottom])
                 .multilineTextAlignment(.center)
-                .font(.caption)
+                .font(.subheadline)
                 .lineSpacing(4)
             Spacer()
         }
@@ -264,9 +265,11 @@ struct BottomCardView: View {
         .shadow(radius: 20)
         
         Button(action: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/{}/*@END_MENU_TOKEN@*/) {
-            /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Content@*/Text("Button")/*@END_MENU_TOKEN@*/
+            Text("submit")
         }
-        .accentColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+        .accentColor(.black)
         .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+        .offset(y: -230)
+        .font(.footnote)
     }
 }
