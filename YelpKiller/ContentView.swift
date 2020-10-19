@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State var show = false
     @State var viewState = CGSize.zero
+    @State var showCard = false
     
     var body: some View {
         ZStack {
@@ -48,7 +49,7 @@ struct ContentView: View {
                 .blendMode(.hardLight)
                 .animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0))
                 .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
-                    self.show.toggle()
+                    self.showCard.toggle()
                         
                 })
                 .gesture(
