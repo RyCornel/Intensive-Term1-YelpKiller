@@ -88,9 +88,9 @@ struct ContentView: View {
                 )
             
             BottomCardView()
-                .offset(x: 0, y: showCard ? 490 : 1000)
+                .offset(x: 0, y: showCard ? 420 : 1000)
                 .blur(radius: show ? 200 : 0)
-                .animation(.timingCurve(0.2, 0.8, 0.2, 0.2, duration: 1))
+                .animation(.timingCurve(0.2, 0.8, 0.2, 0.2, duration: 0.55))
 
         }
     }
