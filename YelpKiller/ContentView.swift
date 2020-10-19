@@ -55,6 +55,7 @@ struct ContentView: View {
     @State var show = false
     @State var viewState = CGSize.zero
     @State var showCard = false
+    @State var swipeCard = false
     @State var bottomState = CGSize.zero
     @State var showFull = false
     
@@ -72,6 +73,7 @@ struct ContentView: View {
 //                        .repeatCount(3, autoreverses: false)
                 )
             
+
             BackCardView()
                 .frame(width: showCard ? 300 : 340, height: 220, alignment: .center)
                 
@@ -114,11 +116,12 @@ struct ContentView: View {
                 .shadow(radius: 20)
                 .offset(x: viewState.width, y: viewState.height)
                 .offset(y: showCard ? -100 : 0)
+                .offset(x: swipeCard ? -500 : 0)
+                .offset(x: swipeCard ? 500 : 0)
                 .blendMode(.hardLight)
                 .animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0))
-                .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
+                .onTapGesture(count: 1, perform: {
                     self.showCard.toggle()
-                        
                 })
                 .gesture(
                     DragGesture().onChanged {
@@ -129,13 +132,18 @@ struct ContentView: View {
                     .onEnded {
                         value in
                         self.viewState = .zero
+//                        if self.viewState.width > -240 {
+//                            self.swipeCard = 500
+//                        }
                         self.show = false
                     }
                 )
-            Text("\(bottomState.height)").offset(y: -300)
+            
+//            Text("\(bottomState.height)").offset(y: -300)
+//            Text("\(viewState.width)").offset(y: -280)
             
             BottomCardView()
-                .offset(x: 0, y: showCard ? 420 : 1000)
+                .offset(x: 0, y: showCard ? 400 : 1000)
                 .offset(y: bottomState.height)
                 .blur(radius: show ? 200 : 0)
                 .animation(.timingCurve(0.2, 0.8, 0.2, 0.2, duration: 0.45))
@@ -162,8 +170,9 @@ struct ContentView: View {
                         self.showFull = false
                     }
                     
-                }
-                )
+                })
+//            Text(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/)
+            
 
         }
     }
@@ -180,11 +189,11 @@ struct CardView: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("UI Design!")
+                    Text("Cafe Duo")
                         .font(.title)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
-                    Text("certificate")
+                    Text("❤️❤️❤️")
                         .foregroundColor(Color("accent"))
                 }
                 Spacer()
@@ -215,7 +224,7 @@ struct TitleView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Certificates")
+                Text("Cafe Duo")
                     .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
                     .fontWeight(.bold)
                     .foregroundColor(Color("card1"))
@@ -225,6 +234,7 @@ struct TitleView: View {
             Image("Background1")
             Spacer()
         }
+        TextEditor(text: .constant("Reviews...")).offset(x: 145, y: 550)
     }
 }
 
@@ -235,9 +245,15 @@ struct BottomCardView: View {
                 .frame(width: 40, height: 5, alignment: .center)
                 .cornerRadius(3)
                 .opacity(0.1)
-            Text("This certificate is proof that Ryan Cornel has achieved the UI Design course with approval from Design+Code instructor.")
+            Text("Coffe & Tea. Specializing in Matcha Tea. Vegan options and gluten-free options available.")
+                .fontWeight(.black)
                 .multilineTextAlignment(.center)
-                .font(.subheadline)
+                .font(.footnote)
+                .lineSpacing(4)
+            TextField("Enter Review Here", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                .padding([.top, .leading, .bottom])
+                .multilineTextAlignment(.center)
+                .font(.caption)
                 .lineSpacing(4)
             Spacer()
         }
