@@ -12,6 +12,7 @@ struct ContentView: View {
     @State var viewState = CGSize.zero
     @State var showCard = false
     @State var bottomState = CGSize.zero
+    @State var showFull = false
     
     var body: some View {
         ZStack {
@@ -97,13 +98,26 @@ struct ContentView: View {
                 .gesture(DragGesture().onChanged {
                     value in
                     self.bottomState = value.translation
+                    if self.showFull {
+                        self.bottomState.height += -330
+                    }
+                    if self.bottomState.height < -330 {
+                        self.bottomState.height = -330
+                    }
                 }
                 .onEnded {
                     value in
                     if self.bottomState.height > 185 {
                         self.showCard = false
                     }
-                    self.bottomState = .zero
+                    if (self.bottomState.height < -185 && !self.showFull) || (self.bottomState.height < -250 && self.showFull) {
+                        self.bottomState.height = -330
+                        self.showFull = true
+                    } else {
+                        self.bottomState = .zero
+                        self.showFull = false
+                    }
+                    
                 }
                 )
 
