@@ -11,13 +11,14 @@ struct ContentView: View {
     @State var show = false
     @State var viewState = CGSize.zero
     @State var showCard = false
+    @State var bottomState = CGSize.zero
     
     var body: some View {
         ZStack {
             TitleView()
                 .blur(radius: show ? 20 : 0)
                 .opacity(showCard ? 0.4 : 1)
-                .offset(y:showCard ? -200 : 0)
+                .offset(y:showCard ? -20 : 0)
                 .animation(
                     Animation
                         .default
@@ -86,11 +87,25 @@ struct ContentView: View {
                         self.show = false
                     }
                 )
+            Text("\(bottomState.height)").offset(y: -300)
             
             BottomCardView()
                 .offset(x: 0, y: showCard ? 420 : 1000)
+                .offset(y: bottomState.height)
                 .blur(radius: show ? 200 : 0)
-                .animation(.timingCurve(0.2, 0.8, 0.2, 0.2, duration: 0.55))
+                .animation(.timingCurve(0.2, 0.8, 0.2, 0.2, duration: 0.45))
+                .gesture(DragGesture().onChanged {
+                    value in
+                    self.bottomState = value.translation
+                }
+                .onEnded {
+                    value in
+                    if self.bottomState.height > 185 {
+                        self.showCard = false
+                    }
+                    self.bottomState = .zero
+                }
+                )
 
         }
     }
